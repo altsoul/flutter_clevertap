@@ -33,15 +33,13 @@ public class ClevertapPlugin implements MethodCallHandler {
       // handle appropriately
       Log.e(tag, e.getMessage());
     }
-  Log.e(tag, "Created Plugin");
+    Log.d(tag, "CleverTap Plugin Initialized");
   }
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "in.altsoul/clevertap");
-    channel.setMethodCallHandler(
-            new ClevertapPlugin(registrar.activity())
-    );
+    channel.setMethodCallHandler(new ClevertapPlugin(registrar.activity()));
   }
 
   private void pushEvent(String eventName, Map<String, Object> eventData) {
@@ -55,20 +53,20 @@ public class ClevertapPlugin implements MethodCallHandler {
   @Override
   public void onMethodCall(MethodCall call, Result result) {
     switch (call.method) {
-      case "pushEvent": {
-        Map<String, Object>_eventData = call.argument("eventData");
-        String _eventName = call.argument("eventName");
-        this.pushEvent(_eventName, _eventData);
-        break;
-      }
-      case "pushUser": {
-        Map<String, Object> profile = call.argument("profile");
-        this.pushUser(profile);
-        break;
-      }
-      default: {
-        result.notImplemented();
-      }
+    case "pushEvent": {
+      Map<String, Object> _eventData = call.argument("eventData");
+      String _eventName = call.argument("eventName");
+      this.pushEvent(_eventName, _eventData);
+      break;
+    }
+    case "pushUser": {
+      Map<String, Object> profile = call.argument("profile");
+      this.pushUser(profile);
+      break;
+    }
+    default: {
+      result.notImplemented();
+    }
     }
   }
 }

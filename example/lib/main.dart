@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:clevertap/clevertap.dart';
+import 'package:flutter_clevertap/flutter_clevertap.dart';
 
 void main() => runApp(MyApp());
 
