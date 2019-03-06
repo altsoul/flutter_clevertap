@@ -26,6 +26,7 @@ public class ClevertapPlugin implements MethodCallHandler {
     this.activity = activity;
     try {
       this.cleverTap = CleverTapAPI.getInstance(activity.getApplicationContext());
+
     } catch (CleverTapMetaDataNotFoundException e) {
       // handle appropriately
       Log.e(tag, e.getMessage());
@@ -34,6 +35,7 @@ public class ClevertapPlugin implements MethodCallHandler {
       Log.e(tag, e.getMessage());
     }
     Log.d(tag, "CleverTap Plugin Initialized");
+    CleverTapAPI.setDebugLevel(CleverTapAPI.LogLevel.INFO);
   }
 
   /** Plugin registration. */
@@ -43,7 +45,7 @@ public class ClevertapPlugin implements MethodCallHandler {
   }
 
   private void pushEvent(String eventName, Map<String, Object> eventData) {
-    this.cleverTap.event.push(eventName, eventData);
+    this.cleverTap.pushEvent(eventName, eventData);
   }
 
   private void pushUser(Map<String, Object> profile) {
