@@ -13,4 +13,8 @@ class Clevertap {
   static Future<void> pushUser(Map<String, dynamic> profile) async {
     return await _channel.invokeMethod('pushUser', {'profile': profile});
   }
+
+  static Future<void> onUserLogin(Map<String, dynamic> profile) async {
+    return await _channel.invokeMethod('onUserLogin', {'profile': profile});
+  }
 }
